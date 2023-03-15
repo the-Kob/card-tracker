@@ -1,4 +1,4 @@
-package com.kob.collection.model;
+package com.kob.model;
 
 import jakarta.persistence.*;
 
@@ -19,14 +19,14 @@ public class Collection {
             generator = "collection_id_sequence"
     )
 
-    private Integer id;
+    private Long id;
     private String name;
     private LocalDate releaseDate;
     private String series;
     private boolean complete;
     private String coverURL;
 
-    public Collection(Integer id, String name, LocalDate releaseDate, String series, boolean complete, String coverURL) {
+    public Collection(Long id, String name, LocalDate releaseDate, String series, boolean complete, String coverURL) {
         this.id = id;
         this.name = name;
         this.releaseDate = releaseDate;
@@ -37,11 +37,11 @@ public class Collection {
 
     public Collection() {}
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,13 +1,14 @@
-package com.kob.collection.service;
+package com.kob.service;
 
-import com.kob.collection.CollectionRepository;
-import com.kob.collection.model.Collection;
+import com.kob.exception.ResourceNotFoundException;
+import com.kob.repository.CollectionRepository;
+import com.kob.model.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class CollectionService {
@@ -19,14 +20,17 @@ public class CollectionService {
     }
 
     public List<Collection> getCollections() {
-        return repository.findAll();
+        List<Collection> result = new ArrayList<>();
+        repository.findAll().forEach(result::add);
+
+        return result;
     }
 
-    public Collection getCollection(Integer id) {
+    public ResponseEntity<Collection> getCollection(Long id) throws ResourceNotFoundException {
         Collection collection = repository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Collection with id " + id + " does not exist."));
+                .orElseThrow(() -> new ResourceNotFoundException("Collection not found for this id :: " + id));
 
-        return collection;
+        return ResponseEntity.ok().body(collection);
     }
 
     public void addCollection(Collection collection) {
@@ -43,19 +47,21 @@ public class CollectionService {
         repository.save(collection);
     }
 
-    public void deleteCollection(Integer id) {
-        boolean exists = repository.existsById(id);
+    public Map<String, Boolean> deleteCollection(Long id) throws ResourceNotFoundException {
+        Collection collection = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Collection not found for this id :: " + id));
 
-        if(!exists) {
-            throw new IllegalStateException("Collection with id " + id + " does not exist.");
-        }
+        repository.delete(collection);
 
-        repository.deleteById(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+
+        return response;
     }
 
-    public void updateCollection(Integer id, String name, LocalDate releaseDate, String series, boolean complete, String coverURL) {
+    public ResponseEntity<Collection> updateCollection(Long id, String name, LocalDate releaseDate, String series, boolean complete, String coverURL) throws ResourceNotFoundException {
         Collection collection = repository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Collection with id " + id + " does not exist."));
+                .orElseThrow(() -> new ResourceNotFoundException("Collection not found for this id :: " + id));
 
         if(name != null && name.length() > 0 && !Objects.equals(collection.getName(), name)) {
             collection.setName(name);
@@ -77,6 +83,8 @@ public class CollectionService {
             collection.setCoverURL(coverURL);
         }
 
-        repository.save(collection);
+        final Collection updatedCollection = repository.save(collection);
+
+        return ResponseEntity.ok(updatedCollection);
     }
 }
