@@ -1,5 +1,6 @@
 package com.kob.service;
 
+import com.kob.dto.CollectionDTO;
 import com.kob.exception.ResourceNotFoundException;
 import com.kob.repository.CollectionRepository;
 import com.kob.model.Collection;
@@ -19,6 +20,19 @@ public class CollectionService {
         this.repository = repository;
     }
 
+    private Collection mapToCollection(CollectionDTO collectionDTO) {
+         Collection collection = Collection.builder()
+                 .collectionId(collectionDTO.getCollectionId())
+                 .name(collectionDTO.getName())
+                 .releaseDate(collectionDTO.getReleaseDate())
+                 .series(collectionDTO.getSeries())
+                 .complete(collectionDTO.isComplete())
+                 .coverURL(collectionDTO.getCoverURL())
+                 .build();
+
+         return collection;
+    }
+
     public List<Collection> getCollections() {
         List<Collection> result = new ArrayList<>();
         repository.findAll().forEach(result::add);
@@ -33,7 +47,7 @@ public class CollectionService {
         return ResponseEntity.ok().body(collection);
     }
 
-    public void addCollection(Collection collection) {
+    public void addCollection(CollectionDTO collectionDTO) {
         /*
          * In case I want to make it so I only want collections with unique names.
          *
@@ -44,7 +58,7 @@ public class CollectionService {
         }
         */
 
-        repository.save(collection);
+        repository.save(mapToCollection(collectionDTO));
     }
 
     public Map<String, Boolean> deleteCollection(Long id) throws ResourceNotFoundException {

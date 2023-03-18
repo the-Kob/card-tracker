@@ -1,5 +1,6 @@
 package com.kob.controller;
 
+import com.kob.dto.CollectionDTO;
 import com.kob.exception.ResourceNotFoundException;
 import com.kob.model.Collection;
 import com.kob.service.CollectionService;
@@ -32,8 +33,8 @@ public class CollectionController {
     }
 
     @PostMapping
-    public void addCollection(@RequestBody Collection collection) {
-        collectionService.addCollection(collection);
+    public void addCollection(@RequestBody CollectionDTO collectionDTO) {
+        collectionService.addCollection(collectionDTO);
     }
 
     @DeleteMapping("/{collectionId}")
