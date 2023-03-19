@@ -2,10 +2,11 @@ server:
   port: 8080
 
 spring:
+  config:
+    import: optional:secrets.properties
   datasource:
-    url: jdbc:postgresql://localhost:5432/collection
-    username: postgres
-    password: password
+    url: jdbc:postgresql://db.tecnico.ulisboa.pt:5432/ist1105806
+    username: ist1105806
 
   jpa:
     hibernate:
