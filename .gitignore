@@ -3,7 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !*/src/main/*/target/
 !*/src/test/*/target/
-
 ### STS ###
 .apt_generated
 .classpath
@@ -12,13 +11,11 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -28,25 +25,16 @@ target/
 build/
 !*/src/main/*/build/
 !*/src/test/*/build/
-
 ### VS Code ###
 .vscode/
-
 secrets.properties
-
-*.iml
-.settings
 target
-.project
-.classpath
 dist
-
 # Numerous always-ignore extensions
 *.bak
 *.patch
 *.diff
 *.err
-
 # temp file for git conflict merging
 *.orig
 *.log
@@ -59,7 +47,6 @@ dist
 *.sass-cache
 *.tmp.html
 *.dump
-
 # OS or Editor folders
 .DS_Store
 ._*
@@ -70,9 +57,7 @@ dist
 *.sublime-workspace
 nbproject
 thumbs.db
-
 # Folders to ignore
-.idea
 .hg
 .svn
 .CVS
@@ -82,5 +67,43 @@ src/main/webapp/WEB-INF/ftl/rsrc/
 src/main/webapp/rsrc/dist/
 src/main/resources/application-local.properties
 webpack-assets.json
-
-secrets.properties
+.env
+.gclient_done
+**/.npmrc
+.tags*
+.vs/
+*.pyc
+*.sln
+*.VC.db
+*.VC.VC.opendb
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.xcodeproj
+/.idea/
+SHASUMS256.txt
+**/package-lock.json
+compile_commands.json
+.envrc
+# npm package
+/npm/dist
+/npm/path.txt
+/npm/checksums.json
+.npmrc
+# Generated API definitions
+electron-api.json
+electron.d.ts
+# Spec hash calculation
+spec/.hash
+# Eslint Cache
+.eslintcache*
+# Generated native addon files
+/spec/fixtures/native-addon/echo/build/
+# If someone runs tsc this is where stuff will end up
+ts-gen
+# Used to accelerate CI builds
+.depshash
+.depshash-target
+# Used to accelerate builds after sync
+patches/mtime-cache.json
+spec/fixtures/logo.png
