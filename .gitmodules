@@ -1,2 +1,5 @@
 [submodule "frontend"]
 	url = https://github.com/the-Kob/card-tracker/frontend
+[submodule "frontend-app"]
+	path = frontend-app
+	url = https://github.com/the-Kob/card-tracker/frontend-app
