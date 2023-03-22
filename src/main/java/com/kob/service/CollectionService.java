@@ -20,7 +20,7 @@ public class CollectionService {
         this.repository = repository;
     }
 
-    private Collection mapToCollection(CollectionDTO collectionDTO) {
+    private static Collection mapToCollection(CollectionDTO collectionDTO) {
          Collection collection = Collection.builder()
                  .collectionId(collectionDTO.getCollectionId())
                  .name(collectionDTO.getName())
@@ -33,11 +33,24 @@ public class CollectionService {
          return collection;
     }
 
-    public List<Collection> getCollections() {
+    private static CollectionDTO mapToDTO(Collection collection) {
+        CollectionDTO collectionDTO = CollectionDTO.builder()
+                .collectionId(collection.getCollectionId())
+                .name(collection.getName())
+                .releaseDate(collection.getReleaseDate())
+                .series(collection.getSeries())
+                .complete(collection.isComplete())
+                .coverURL(collection.getCoverURL())
+                .build();
+
+        return collectionDTO;
+    }
+
+    public List<CollectionDTO> getCollections() {
         List<Collection> result = new ArrayList<>();
         repository.findAll().forEach(result::add);
 
-        return result;
+        return result.stream().map(CollectionService::mapToDTO).toList();
     }
 
     public ResponseEntity<Collection> getCollection(Long id) throws ResourceNotFoundException {

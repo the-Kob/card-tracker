@@ -2,6 +2,9 @@ server:
   port: 8080
 
 spring:
+  data:
+    rest:
+      base-path: /api
   config:
     import: optional:secrets.properties
   datasource:

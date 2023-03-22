@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/v1/collections")
 public class CollectionController {
@@ -23,7 +24,7 @@ public class CollectionController {
     }
 
     @GetMapping
-    public List<Collection> getCollections() {
+    public List<CollectionDTO> getCollections() {
         return collectionService.getCollections();
     }
 
