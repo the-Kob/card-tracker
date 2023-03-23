@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Collections, {loader as collectionsLoader} from "./routes/collections";
+import Collection, {loader as collectionLoader, action as collectionAction} from "./routes/collection";
 import ErrorPage from "./routes/error-page";
 
 const router = createBrowserRouter([
@@ -13,12 +14,13 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         loader: collectionsLoader,
     },
-    /*
     {
-        path: "collections/:id",
-        element: <Collection />
-    }
-     */
+        path: "/:collectionId",
+        element: <Collection />,
+        errorElement: <ErrorPage />,
+        loader: collectionLoader,
+        action: collectionAction,
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

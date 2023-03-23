@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CollectionDTO {
-    private Long collectionId;
     private String name;
     private LocalDate releaseDate;
     private String series;

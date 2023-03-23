@@ -22,7 +22,6 @@ public class CollectionService {
 
     private static Collection mapToCollection(CollectionDTO collectionDTO) {
          Collection collection = Collection.builder()
-                 .collectionId(collectionDTO.getCollectionId())
                  .name(collectionDTO.getName())
                  .releaseDate(collectionDTO.getReleaseDate())
                  .series(collectionDTO.getSeries())
@@ -35,7 +34,6 @@ public class CollectionService {
 
     private static CollectionDTO mapToDTO(Collection collection) {
         CollectionDTO collectionDTO = CollectionDTO.builder()
-                .collectionId(collection.getCollectionId())
                 .name(collection.getName())
                 .releaseDate(collection.getReleaseDate())
                 .series(collection.getSeries())
@@ -46,11 +44,11 @@ public class CollectionService {
         return collectionDTO;
     }
 
-    public List<CollectionDTO> getCollections() {
+    public List<Collection> getCollections() {
         List<Collection> result = new ArrayList<>();
         repository.findAll().forEach(result::add);
 
-        return result.stream().map(CollectionService::mapToDTO).toList();
+        return result;
     }
 
     public ResponseEntity<Collection> getCollection(Long id) throws ResourceNotFoundException {
@@ -64,7 +62,7 @@ public class CollectionService {
         /*
          * In case I want to make it so I only want collections with unique names.
          *
-        Optional<Collection> collectionOptional = repository.findCollectionByName(collection.getName());
+        Optional<Collection> collectionOptional = repository.findCollectionByName(collection.jsx.getName());
 
         if(collectionOptional.isPresent()) {
             throw new IllegalStateException("Name taken.");

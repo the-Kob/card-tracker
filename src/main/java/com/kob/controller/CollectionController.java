@@ -24,7 +24,7 @@ public class CollectionController {
     }
 
     @GetMapping
-    public List<CollectionDTO> getCollections() {
+    public List<Collection> getCollections() {
         return collectionService.getCollections();
     }
 
