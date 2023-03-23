@@ -51,3 +51,7 @@ export async function createCollection(collection) {
 
     await fetch(request);
 }
+
+export async function updateCollection() {
+
+}
